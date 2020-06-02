@@ -1,16 +1,30 @@
-let shapes = [];
+let currentShape;
 
+let deadBlocks = [];
+let deadBlocksMatrix = [];
+let gameWidth;
+let gameHeight;
 let shapeIDs = [];
+let shapeFallRate = 30;//number of falls per second
+
 
 function setup() {
     window.canvas = createCanvas(800, 800);
     window.canvas.parent("canvas");
-    frameRate(4);
+    gameHeight = canvas.height / BLOCK_SIZE;
+    gameWidth = canvas.width / BLOCK_SIZE;
+    for (let i = 0; i < gameWidth; i++) {
+        let column = [];
+        for (let j = 0; j < gameHeight; j++) {
+            column.push(null);
+        }
+        deadBlocksMatrix.push(column);
+    }
+    print(deadBlocksMatrix);
+
+    frameRate(30);
     setShapeIDs();
-    shapeIDs = [squareShape, lShape, reverseLShape, lineShape, tShape, zShape, sShape];
-    // shapeIDs = [lineShape];
-    let newShape = new Shape(getRandomShapeID(), createVector(10, 0));
-    shapes.push(newShape);
+    currentShape = new Shape(getRandomShapeID(), createVector(10, 0));
 }
 
 function draw() {
@@ -18,14 +32,33 @@ function draw() {
     background(255);
 
     drawGrid();
-    for (let shape of shapes) {
-        shape.draw();
-        shape.moveDown();
-        shape.rotateShape();
+
+
+    for (let block of deadBlocks) {
+        block.draw();
     }
-    // if (frameCount % 4 === 0) {
-        shapes.push(new Shape(getRandomShapeID(), createVector(Math.floor(random(1, canvas.width / BLOCK_SIZE - 2)), 0)));
-    // }
+    currentShape.draw();
+    if (frameCount % 17 === 0) {
+        currentShape.rotateShape(true);
+    }
+    if (frameCount % (30 / shapeFallRate) === 0) {
+        currentShape.moveDown();
+        if (currentShape.isDead) {
+            currentShape = new Shape(getRandomShapeID(), createVector(floor(random(1, gameWidth - 2)), 0));
+            if(!currentShape.canMoveDown()){
+                for (let i = 0; i < gameWidth; i++) {
+                    let column = [];
+                    for (let j = 0; j < gameHeight; j++) {
+                        column.push(null);
+                    }
+                    deadBlocksMatrix.push(column);
+                }
+                deadBlocks = [];
+                currentShape = new Shape(getRandomShapeID(), createVector(floor(random(1, gameWidth - 2)), 0));
+
+            }
+        }
+    }
 
     push();
     noFill();

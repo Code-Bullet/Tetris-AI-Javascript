@@ -4,6 +4,7 @@ class Block{
         this.startingGridPos = startingGridPos;
         this.currentGridPos = startingGridPos;
         this.color = color;
+        this.isDead = false;
     }
 
     draw(){
