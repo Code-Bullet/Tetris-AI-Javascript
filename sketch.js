@@ -51,7 +51,7 @@ function draw() {
                     for (let j = 0; j < gameHeight; j++) {
                         column.push(null);
                     }
-                    deadBlocksMatrix.push(column);
+                    deadBlocksMatrix[i]=column;
                 }
                 deadBlocks = [];
                 currentShape = new Shape(getRandomShapeID(), createVector(floor(random(1, gameWidth - 2)), 0));
