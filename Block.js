@@ -1,4 +1,3 @@
-var BLOCK_SIZE = 40;
 class Block{
     constructor(startingGridPos, color) {
         this.startingGridPos = startingGridPos;
@@ -8,6 +7,8 @@ class Block{
     }
 
     draw(){
+        if(this.isDead)
+            return;
         push();
         let pos = this.currentGridPos;
         fill(this.color);
@@ -17,7 +18,4 @@ class Block{
         pop();
     }
 
-    moveDown(){
-        this.currentGridPos.y +=1;
-    }
 }

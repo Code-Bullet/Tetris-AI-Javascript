@@ -35,6 +35,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="SvnConfiguration">
@@ -47,7 +48,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591065311562</updated>
-      <workItem from="1591065313564" duration="14824000" />
+      <workItem from="1591065313564" duration="15095000" />
+      <workItem from="1591754995550" duration="15824000" />
     </task>
     <servers />
   </component>
@@ -64,19 +66,20 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="279" y="58" key="SettingsEditor" timestamp="1591065609548">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591065609548" />
-    <state x="426" y="188" key="run.anything.popup" timestamp="1591079210841">
+    <state x="426" y="188" width="672" height="677" key="run.anything.popup" timestamp="1591769568507">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="426" y="188" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1591079210841" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1591076529428">
+    <state x="426" y="188" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1591769568507" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1591774863725">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1591076529428" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1591774863725" />
   </component>
 </project>

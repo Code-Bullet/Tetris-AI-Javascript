@@ -5,84 +5,90 @@ let deadBlocksMatrix = [];
 let gameWidth;
 let gameHeight;
 let shapeIDs = [];
-let shapeFallRate = 30;//number of falls per second
+let shapeFallRate = 1;//number of falls per second
 
-
+let horizontalMoveEveryXFrames = 3;// the speed the blocks move when the left or right key is down
+let horizontalMoveCounter = 0;
+let verticalMoveEveryXFrames = 2;// the speed the blocks move when the left or right key is down
+let verticalMoveCounter = 0;
+let game;
+let BLOCK_SIZE = 35;
+let gameWidthBlocks = 10;
+let gameHeightBlocks = 20;
 function setup() {
-    window.canvas = createCanvas(800, 800);
+    window.canvas = createCanvas(1000, 800);
     window.canvas.parent("canvas");
-    gameHeight = canvas.height / BLOCK_SIZE;
-    gameWidth = canvas.width / BLOCK_SIZE;
-    for (let i = 0; i < gameWidth; i++) {
-        let column = [];
-        for (let j = 0; j < gameHeight; j++) {
-            column.push(null);
-        }
-        deadBlocksMatrix.push(column);
-    }
-    print(deadBlocksMatrix);
-
+    game = new Game(gameWidthBlocks,gameHeightBlocks);
     frameRate(30);
-    setShapeIDs();
-    currentShape = new Shape(getRandomShapeID(), createVector(10, 0));
 }
 
 function draw() {
 
-    background(255);
-
-    drawGrid();
-
-
-    for (let block of deadBlocks) {
-        block.draw();
-    }
-    currentShape.draw();
-    if (frameCount % 17 === 0) {
-        currentShape.rotateShape(true);
-    }
-    if (frameCount % (30 / shapeFallRate) === 0) {
-        currentShape.moveDown();
-        if (currentShape.isDead) {
-            currentShape = new Shape(getRandomShapeID(), createVector(floor(random(1, gameWidth - 2)), 0));
-            if(!currentShape.canMoveDown()){
-                for (let i = 0; i < gameWidth; i++) {
-                    let column = [];
-                    for (let j = 0; j < gameHeight; j++) {
-                        column.push(null);
-                    }
-                    deadBlocksMatrix.push(column);
-                }
-                deadBlocks = [];
-                currentShape = new Shape(getRandomShapeID(), createVector(floor(random(1, gameWidth - 2)), 0));
-
-            }
+    game.draw();
+    if (leftKeyIsDown || rightKeyIsDown) {
+        if (horizontalMoveCounter >= horizontalMoveEveryXFrames) {
+            leftKeyIsDown ? game.moveShapeLeft() : game.moveShapeRight();
+            horizontalMoveCounter = 0;
         }
+        horizontalMoveCounter++;
     }
 
-    push();
-    noFill();
-    stroke(0);
-    strokeWeight(6);
-    rect(0, 0, canvas.width - 1, canvas.height - 1);
+    if(downKeyIsDown){
+        if (verticalMoveCounter >= verticalMoveEveryXFrames) {
+            game.moveShapeDown();
+            verticalMoveCounter = 0;
+        }
+        verticalMoveCounter++;
+    }
+    //uncomment to rotate the current shape every 17 frames
+    // if (frameCount % 17 === 0) {
+    //     currentShape.rotateShape(true);
+    // }
+    if (frameCount % int(1000 / shapeFallRate) === 0) {
+        game.moveShapeDown();
+    }
 
-    pop();
 }
 
-function getRandomShapeID() {
 
-    return shapeIDs[Math.floor(random(0, shapeIDs.length))];
+let leftKeyIsDown = false;
+let upKeyIsDown = false;
+let rightKeyIsDown = false;
+let downKeyIsDown = false;
+
+
+function keyPressed() {
+    if (keyCode === UP_ARROW) {
+        game.rotateShape();
+        upKeyIsDown = true;
+    } else if (keyCode === DOWN_ARROW) {
+        downKeyIsDown = true;
+    }
+    if (keyCode === LEFT_ARROW) {
+        game.moveShapeLeft();
+        leftKeyIsDown = true;
+        horizontalMoveCounter = 0;
+    } else if (keyCode === RIGHT_ARROW) {
+        game.moveShapeRight();
+        rightKeyIsDown = true;
+        horizontalMoveCounter = 0;
+    }
+    if(key === ' '){
+        game.holdShape();
+    }
 }
 
-function drawGrid() {
-    push();
-    stroke(200);
-    strokeWeight(1);
-    for (let i = 0; i < canvas.width / BLOCK_SIZE; i++) {
-        line(i * BLOCK_SIZE, 0, i * BLOCK_SIZE, canvas.height);
+function keyReleased() {
+
+    if (keyCode === UP_ARROW) {
+        upKeyIsDown = false;
+    } else if (keyCode === DOWN_ARROW) {
+        downKeyIsDown = false;
     }
-    for (let j = 0; j < canvas.height / BLOCK_SIZE; j++) {
-        line(0, j * BLOCK_SIZE, canvas.width, j * BLOCK_SIZE);
+
+    if (keyCode === LEFT_ARROW) {
+        leftKeyIsDown = false;
+    } else if (keyCode === RIGHT_ARROW) {
+        rightKeyIsDown = false;
     }
-    pop();
 }
