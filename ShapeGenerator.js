@@ -6,8 +6,8 @@ class ShapeGenerator {
 
     }
 
-    getNewRandomShape(position) {
-        return new Shape(this.getRandomShapeID(), position);
+    getNewRandomShape(position, game) {
+        return new Shape(this.getRandomShapeID(), position, game);
     }
 
     getRandomShapeID() {

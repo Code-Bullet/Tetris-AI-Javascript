@@ -11,16 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76910cd7-2d50-4b57-b1ed-a3bd9c59cfb3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/AI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AStar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlockMatrix.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CheckedPositionsArray.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MoveHistory.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Node.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Path.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Brain.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Player.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Population.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Block.js" beforeDir="false" afterPath="$PROJECT_DIR$/Block.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI.js" beforeDir="false" afterPath="$PROJECT_DIR$/AI.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/Game.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/Shape.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShapeGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/ShapeGenerator.js" afterDir="false" />
@@ -84,7 +79,7 @@
       <workItem from="1595830503404" duration="9694000" />
       <workItem from="1596426153673" duration="10606000" />
       <workItem from="1596502982080" duration="14716000" />
-      <workItem from="1596589877920" duration="10767000" />
+      <workItem from="1596589877920" duration="17058000" />
     </task>
     <servers />
   </component>
@@ -104,29 +99,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="396" y="92" key="#Inspections" timestamp="1596607471554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="396" y="92" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1596607471554" />
     <state x="279" y="58" key="SettingsEditor" timestamp="1591065609548">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591065609548" />
-    <state x="426" y="188" width="672" height="677" key="run.anything.popup" timestamp="1596595125397">
+    <state x="426" y="188" width="672" height="677" key="run.anything.popup" timestamp="1596602829474">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="426" y="188" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596595125397" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1595833185155">
+    <state x="426" y="188" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596602829474" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1596603178714">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1595833185155" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/BlockMatrix.js</url>
-          <line>303</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1596603178714" />
   </component>
 </project>

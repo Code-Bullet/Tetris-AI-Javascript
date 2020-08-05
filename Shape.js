@@ -1,5 +1,6 @@
 class Shape {
-    constructor(shapeID, startingPos) {
+    constructor(shapeID, startingPos, game) {
+        this.game = game;
         this.shapeID = shapeID;
         this.currentPos = createVector(startingPos.x, startingPos.y);
         this.startingPos = createVector(startingPos.x, startingPos.y);
@@ -19,7 +20,7 @@ class Shape {
 
     clone(){
 
-        let clone = new Shape(this.shapeID, this.startingPos);
+        let clone = new Shape(this.shapeID, this.startingPos, this.game);
         clone.currentPos = this.currentPos.copy();
         clone.blocks = [];
         for(let block of this.blocks){
@@ -97,8 +98,8 @@ class Shape {
             for (let block of this.blocks) {
                 //the block becomes disconnected from the shape and therefore the current grid position is no longer relative to the shape
                 block.currentGridPos.add(this.currentPos);
-                game.deadBlocks.push(block);
-                game.deadBlocksMatrix[block.currentGridPos.x][block.currentGridPos.y] = block;
+                this.game.deadBlocks.push(block);
+                this.game.deadBlocksMatrix[block.currentGridPos.x][block.currentGridPos.y] = block;
             }
         }
     }
@@ -115,7 +116,7 @@ class Shape {
                     return false;
                 }
             }else{
-                if (!game.isPositionVacant(futureBlockPosition)) {
+                if (!this.game.isPositionVacant(futureBlockPosition)) {
                     return false;
                 }
             }
@@ -136,7 +137,7 @@ class Shape {
                     return false;
                 }
             }else{
-                if (!game.isPositionVacant(futureBlockPosition)) {
+                if (!this.game.isPositionVacant(futureBlockPosition)) {
                     return false;
                 }
             }
@@ -155,7 +156,7 @@ class Shape {
                     return false;
                 }
             }else{
-                if (!game.isPositionVacant(newAbsolutePosition)) {
+                if (!this.game.isPositionVacant(newAbsolutePosition)) {
                     return false;
                 }
             }

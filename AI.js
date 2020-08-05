@@ -1,7 +1,7 @@
 class AI {
-    constructor() {
-        this.gameWidth = game.gameWidth;
-        this.gameHeight = game.gameHeight;
+    constructor(gameWidth, gameHeight) {
+        this.gameWidth = gameWidth;
+        this.gameHeight = gameHeight;
         this.movementPlan = new MoveHistory();
     }
 

@@ -5,9 +5,9 @@ class Game {
         this.shapeGenerator = new ShapeGenerator();
         this.deadBlocks = [];
         this.deadBlocksMatrix = [];
-        this.currentShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0));
+        this.currentShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0), this);
         this.resetBlocksMatrix();
-        this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0));
+        this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0), this);
         this.heldShape = null;
         this.hasHeldThisShape = false;
         this.score = 0;
@@ -16,6 +16,8 @@ class Game {
         this.totalLineClears = 0;
         this.totalTetrises = 0;
         this.timeSinceTetris = 10;
+        this.needsNewMovementPlan =false;
+
     }
 
     resetBlocksMatrix() {
@@ -49,9 +51,8 @@ class Game {
 
 
             this.currentShape = this.nextShape;
-            this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0));
-            ai.movementPlan = null;
-
+            this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0),this);
+            this.needsNewMovementPlan =true;
             //if the new block is stuck then the game resets
 
             if (!this.currentShape.canMoveInDirection(0, 0)) {
@@ -63,8 +64,8 @@ class Game {
     resetGame() {
         this.resetBlocksMatrix();
         this.deadBlocks = [];
-        this.currentShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0));
-        this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0));
+        this.currentShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0),this);
+        this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0),this);
         this.heldShape = null;
         this.score = 0;
 
@@ -152,12 +153,15 @@ class Game {
     draw() {
 
 
-        background(240);
+
+        // fill(0);
+
+        // background(240);
 
         //draw a rectangle boarder around the whole thing
         push();
         {
-            noFill();
+            fill(240);
             stroke(200);
             strokeWeight(4);
             rect(2, 2, canvas.width - 4, canvas.height - 4);
@@ -252,7 +256,7 @@ class Game {
             this.heldShape = this.currentShape;
             this.heldShape.resetPosition();
             this.currentShape = this.nextShape;
-            this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0));
+            this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0),this);
         }
     }
 
