@@ -18,7 +18,10 @@ class Game {
         this.timeSinceTetris = 10;
         this.needsNewMovementPlan =false;
 
+        this.isDead = false;
     }
+
+
 
     resetBlocksMatrix() {
         this.deadBlocksMatrix = [];
@@ -43,22 +46,24 @@ class Game {
             this.checkForTetris();
             if(this.justTetrised){
 
-
-
             }else{
                 this.checkForClearedLines();
             }
 
-
             this.currentShape = this.nextShape;
             this.nextShape = this.shapeGenerator.getNewRandomShape(createVector(int(this.gameWidth / 2), 0),this);
             this.needsNewMovementPlan =true;
-            //if the new block is stuck then the game resets
 
-            if (!this.currentShape.canMoveInDirection(0, 0)) {
-                this.resetGame();
+            //if the new block is stuck then the game resets
+            if (!this.currentShape.canMoveInDirection(0, 0) || this.score > 500) {
+                this.isDead = true;
+                // this.resetGame();
             }
         }
+    }
+
+    getTetrisRate(){
+        return (this.totalTetrises / Math.max(1, this.totalLineClears)) * 100;
     }
 
     resetGame() {

@@ -7,14 +7,19 @@ class Population {
         this.generation = 1;
 
 
-        this.playersPerRow = Math.ceil(Math.sqrt(size));
-        this.playersPerColumn = Math.ceil(Math.sqrt(size));
+        //batch stuff
+        this.batchSize = 16;
+        this.currentBatchNumber = 0;
+        this.numberOfBatches = Math.ceil(size / this.batchSize);
 
-        this.playerWidth = canvas.width / Math.ceil(Math.sqrt(size));
-        this.playerHeight = canvas.height / Math.ceil(Math.sqrt(size));
+        this.playersPerRow = Math.ceil(Math.sqrt(this.batchSize));
+        this.playersPerColumn = Math.ceil(Math.sqrt(this.batchSize));
+
+        this.playerWidth = canvas.width / this.playersPerRow;
+        this.playerHeight = canvas.height / this.playersPerColumn;
 
         for (let i = 0; i < size; i++) {
-            let player = new Player();
+            let player = new Player(i === 0);
             player.windowWidth = this.playerWidth;
             player.windowHeight = this.playerHeight;
             this.players.push(player);
@@ -23,28 +28,56 @@ class Population {
 
     }
 
+    getCurrentBatchOfPlayers() {
+        let currentBatch = [];
+        for (let i = this.currentBatchNumber * this.batchSize; i < (this.currentBatchNumber + 1) * this.batchSize; i++) {
+            currentBatch.push(this.players[i]);
+        }
+        return currentBatch;
+
+    }
+
 
     show() {
+        push();
+        background(240);
+
+
+        textSize(30);
+        fill(100);
+        stroke(100);
+        textAlign(CENTER,CENTER);
+        text("Gen: " + this.generation + "\t\t Batch: " + (this.currentBatchNumber +1) + "\t\tAverage Fitness: " + (this.fitnessSum/this.players.length).toFixed(2),canvas.width/2,25 );
+
+        translate(0, 50);
+        scale(1, (canvas.height - 50) / canvas.height);
+
+
         let x = 0;
         let y = 0;
-        for (let i = 0; i < this.players.length; i++) {
+        let currentBatch = this.getCurrentBatchOfPlayers();
+        for (let i = 0; i < currentBatch.length; i++) {
             push();
             translate(x * this.playerWidth, y * this.playerHeight);
-            this.players[i].show();
+            currentBatch[i].show();
             x++;
             if (x >= this.playersPerRow) {
                 x = 0;
                 y++;
             }
-
             pop();
         }
+
+        pop();
     }
 
-
     update() {
-        for (let i = 0; i < this.players.length; i++) {
-            this.players[i].update();
+        let currentBatch = this.getCurrentBatchOfPlayers();
+        for (let i = 0; i < currentBatch.length; i++) {
+            currentBatch[i].update();
+        }
+        if (this.areAllPlayersInBatchDead()) {
+            this.currentBatchNumber++;
         }
     }
 
@@ -67,7 +100,10 @@ class Population {
             nextGen.push(child);
         }
 
+
+        this.players = nextGen;
         this.generation++;
+        this.currentBatchNumber = 0;
     }
 
     setBestPlayer() {
@@ -104,6 +140,24 @@ class Population {
         for (let player of this.players) {
             this.fitnessSum += player.fitness;
         }
+    }
+
+    areAllPlayersDead() {
+        for (let player of this.players) {
+            if (!player.isDead) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    areAllPlayersInBatchDead() {
+        for (let player of this.getCurrentBatchOfPlayers()) {
+            if (!player.isDead) {
+                return false;
+            }
+        }
+        return true;
     }
 
 

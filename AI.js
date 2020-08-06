@@ -1,8 +1,16 @@
 class AI {
-    constructor(gameWidth, gameHeight) {
+
+
+    constructor(gameWidth, gameHeight, brain) {
+
+
+
+
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.movementPlan = new MoveHistory();
+        this.brain = brain;
+
     }
 
     //Main function
@@ -217,7 +225,7 @@ class AI {
         blockMatrix.calculateMaximumLineHeight();
         blockMatrix.countNumberOfBlocksInRightmostLane();
         blockMatrix.calculateBumpiness();
-        blockMatrix.calculateCost();
+        blockMatrix.calculateCost(this.brain);
         return blockMatrix.cost;
     }
 
@@ -362,7 +370,7 @@ class AI {
             newMatrix.calculateMaximumLineHeight();
             newMatrix.countNumberOfBlocksInRightmostLane();
             newMatrix.calculateBumpiness();
-            newMatrix.calculateCost();
+            newMatrix.calculateCost(this.brain);
 
             //add the shapes movement history to the matrix so we know how to reach this matrix
             newMatrix.addMovementHistory(shape.moveHistory);

@@ -25,7 +25,7 @@ let possibleAIMoveCounter = 0;
 
 //------------------------------------------------------------- ai learning stuff
 let population;
-let populationSize = 16;
+let populationSize = 160;
 
 
 function preload() {
@@ -48,8 +48,15 @@ function draw() {
 
     push();
 
-    population.show();
-    population.update();
+
+    if (!population.areAllPlayersDead()) {
+        population.show();
+        if (!paused) population.update();
+    } else {
+        population.naturalSelection();
+        population.show();
+        population.update();
+    }
     // game.draw();
 
     // writeCurrentOptimisations();

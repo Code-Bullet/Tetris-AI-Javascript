@@ -12,7 +12,7 @@ class BlockMatrix {
         this.pillarCount = 0;
         this.addedShapeHeight = 0;
         this.maximumLineHeight = 0;
-        this.bumpiness=0;
+        this.bumpiness = 0;
 
         this.linesCleared = 0;
 
@@ -194,23 +194,28 @@ class BlockMatrix {
                     this.blocksAboveHoles += numberOfBlocksFound;
 
 
-                    if(i< this.width-2){
+                    if (i < this.width - 2) {
                         //check if there is 2 spaces to the right
-                        if(this.matrix[i+1][j] === null && this.matrix[i+2][j] === null){
+                        if (this.matrix[i + 1][j] === null && this.matrix[i + 2][j] === null) {
                             // this is not a full hole this is an open hole
+                            // wait not yet, if the hole has a free block next to it and a free block below that, then it is a proper hole because you cannot fill this hole without creating a proper hole
+                            if (j === this.height - 1 || this.matrix[i+1][j+1] != null ) {//if were on the bottom layer or the block 1 to the right and 1 down is a block, then we chill
+                                this.openHoleCount++
+                                continue;
+                            }
 
-                            this.openHoleCount++;
-                            continue;
                         }
                     }
 
-                    if(i >= 2){
+                    if (i >= 2) {
                         //check to the left
-                        if(this.matrix[i-1][j] === null && this.matrix[i-2][j] === null){
+                        if (this.matrix[i - 1][j] === null && this.matrix[i - 2][j] === null) {
                             // this is not a full hole this is an open hole
-
-                            this.openHoleCount++;
-                            continue;
+                            // wait not yet, if the hole has a free block next to it and a free block below that, then it is a proper hole because you cannot fill this hole without creating a proper hole
+                            if (j === this.height - 1 || this.matrix[i-1][j+1] != null ) {//if were on the bottom layer or the block 1 to the left and 1 down is a block, then we chill
+                                    this.openHoleCount++
+                                    continue;
+                            }
                         }
                     }
 
@@ -258,7 +263,7 @@ class BlockMatrix {
                 } else {
                     //if the current pillar height is >=3 then we have found a pillar, yay
                     if (currentPillarHeightR >= 3) {
-                        this.pillarCount += currentPillarHeightR ;
+                        this.pillarCount += currentPillarHeightR;
                     }
                     currentPillarHeightR = 0;
                 }
@@ -285,17 +290,17 @@ class BlockMatrix {
 
     }
 
-    calculateBumpiness(){
+    calculateBumpiness() {
         //bumpiness is defined as the total difference between column heights
-        this.bumpiness =0;
+        this.bumpiness = 0;
         let previousLineHeight = 0;
 
-        for (let i = 0; i < this.width-1; i++) {//note dont care about final row
+        for (let i = 0; i < this.width - 1; i++) {//note dont care about final row
             for (let j = 0; j < this.height; j++) {
                 if (this.matrix[i][j] != null) {
-                    let currentLineHeight = this.height  -j;
-                    if(i !==0){
-                        this.bumpiness += Math.abs(previousLineHeight-currentLineHeight);
+                    let currentLineHeight = this.height - j;
+                    if (i !== 0) {
+                        this.bumpiness += Math.abs(previousLineHeight - currentLineHeight);
                     }
                     previousLineHeight = currentLineHeight;
                     break;
@@ -307,7 +312,13 @@ class BlockMatrix {
 
 
     //assumes a shape has been added, the lines have been cleared, the holes are counted and the pillars are counted
-    calculateCost() {
+    calculateCost(brain) {
+        if (brain) {
+            this.cost = brain.getCostOfMatrix(this);
+            return;
+        }
+
+
         let holeCountMultiplier = 100;
         let openHoleCountMultiplier = 70;
 
@@ -325,7 +336,7 @@ class BlockMatrix {
         let tetrises = this.linesCleared === 4 ? 1 : 0;
 
         //if shit aint going great then stop trying to tetris shit
-        if(this.maximumLineHeight>10 || this.holeCount>0 || this.pillarCount > 10){
+        if (this.maximumLineHeight > 10 || this.holeCount > 0 || this.pillarCount > 10) {
             nonTetrisClearPenalty = 0;
             maximumLineHeightMultiplier = 1;
         }
@@ -337,8 +348,8 @@ class BlockMatrix {
             tetrises * tetrisRewardMultiplier +
             this.maximumLineHeight * maximumLineHeightMultiplier +
             this.addedShapeHeight * addedShapeHeightMultiplier +
-            this.pillarCount * pillarCountMultiplier+
-            this.blocksInRightLane * blocksInRightMostLaneMultiplier+
+            this.pillarCount * pillarCountMultiplier +
+            this.blocksInRightLane * blocksInRightMostLaneMultiplier +
             this.bumpiness * bumpinessMultiplier;
     }
 }

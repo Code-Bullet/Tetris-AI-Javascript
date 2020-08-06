@@ -11,7 +11,6 @@ class Shape {
         this.isDead = false;
         this.currentRotationCount = 0;
 
-
         //vectors which control this piece into the best position
         this.moveHistory = new MoveHistory();
     }

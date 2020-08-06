@@ -11,14 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76910cd7-2d50-4b57-b1ed-a3bd9c59cfb3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Brain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Player.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Population.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AI.js" beforeDir="false" afterPath="$PROJECT_DIR$/AI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlockMatrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/BlockMatrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Brain.js" beforeDir="false" afterPath="$PROJECT_DIR$/Brain.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/Game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/Player.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Population.js" beforeDir="false" afterPath="$PROJECT_DIR$/Population.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/Shape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShapeGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/ShapeGenerator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/sketch.js" afterDir="false" />
     </list>
@@ -79,7 +79,10 @@
       <workItem from="1595830503404" duration="9694000" />
       <workItem from="1596426153673" duration="10606000" />
       <workItem from="1596502982080" duration="14716000" />
-      <workItem from="1596589877920" duration="17058000" />
+      <workItem from="1596589877920" duration="17104000" />
+      <workItem from="1596621451704" duration="1671000" />
+      <workItem from="1596677251919" duration="590000" />
+      <workItem from="1596678718348" duration="5114000" />
     </task>
     <servers />
   </component>
@@ -111,9 +114,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="426" y="188" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596602829474" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1596603178714">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1596682216086">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1596603178714" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1596682216086" />
   </component>
 </project>

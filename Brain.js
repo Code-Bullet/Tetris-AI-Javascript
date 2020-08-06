@@ -1,7 +1,11 @@
 class Brain {
-    constructor() {
+    constructor(isFirst) {
         this.multipliers = {};
-        this.randomizeMultipliers();
+        if(isFirst){
+            this.setAsMyMultipliers();
+        }else{
+            this.randomizeMultipliers();
+        }
     }
 
     randomizeMultipliers() {
@@ -16,6 +20,21 @@ class Brain {
             blocksAboveHolesMultiplier: 5 * random(0, 2),
             bumpinessMultiplier: 5 * random(0, 2),
             tetrisRewardMultiplier: -10 * random(0, 2)
+        };
+    }
+
+    setAsMyMultipliers() {
+        this.multipliers = {
+            holeCountMultiplier: 100,// * random(0, 2),
+            openHoleCountMultiplier: 70,// * random(0, 2),
+            maximumLineHeightMultiplier: 1,// * random(0, 2),
+            addedShapeHeightMultiplier: 1,// * random(0, 2),
+            pillarCountMultiplier: 4,// * random(0, 2),
+            blocksInRightMostLaneMultiplier: 10,// * random(0, 2),
+            nonTetrisClearPenalty: 20,// * random(0, 2),
+            blocksAboveHolesMultiplier: 5,// * random(0, 2),
+            bumpinessMultiplier: 5,// * random(0, 2),
+            tetrisRewardMultiplier: -10,// * random(0, 2)
         };
     }
 
@@ -61,6 +80,45 @@ class Brain {
         return blockMatrix.cost;
     }
 
+    writeMultipliers(startingX,startingY){
 
+        push();
+
+
+
+        let  multiplierStats = [`Hole Count: ${this.multipliers.holeCountMultiplier.toFixed(2)}`,
+            `Open Hole Count: ${this.multipliers.openHoleCountMultiplier.toFixed(2)}`,
+            `Blocks above Holes: ${this.multipliers.blocksAboveHolesMultiplier.toFixed(2)}`,
+            `Non tetris clear: ${this.multipliers.nonTetrisClearPenalty.toFixed(2)}`,
+            `Tetris clear: ${this.multipliers.tetrisRewardMultiplier.toFixed(2)}`,
+            `Maximum line height: ${this.multipliers.maximumLineHeightMultiplier.toFixed(2)}`,
+            `Added Shape Height: ${this.multipliers.addedShapeHeightMultiplier.toFixed(2)}`,
+            `Pillar Count: ${this.multipliers.pillarCountMultiplier.toFixed(2)}`,
+            `Blocks in right lane: ${this.multipliers.blocksInRightMostLaneMultiplier.toFixed(2)}`,
+            `Bumpiness: ${this.multipliers.bumpinessMultiplier.toFixed(2)}`];
+
+
+        textAlign(LEFT, CENTER);
+        fill(100);
+        stroke(0);
+        strokeWeight(1);
+
+        let textGap = 30;
+
+        textSize(20);
+        noStroke();
+
+        text("Multipliers", startingX, startingY);
+        textSize(15);
+        noStroke();
+        for (let i = 0; i < multiplierStats.length; i++) {
+            text(multiplierStats[i], startingX, startingY + (i + 1) * textGap);
+        }
+
+
+        pop();
+
+
+    }
 
 }
